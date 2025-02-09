@@ -9,6 +9,7 @@ namespace Gameplay.Player.Models
     {
         public bool IsMovable;
         public bool IsInvincible;
+        public bool IsDead;
         public float MoveYSpeed;
         public float DeathTimeout;
 
@@ -18,6 +19,7 @@ namespace Gameplay.Player.Models
             IsInvincible = playerConfig.InitInvincible;
             MoveYSpeed = playerConfig.MoveYSpeed;
             DeathTimeout = playerConfig.DeathTimeout;
+            IsDead = false;
         }
     }
 }

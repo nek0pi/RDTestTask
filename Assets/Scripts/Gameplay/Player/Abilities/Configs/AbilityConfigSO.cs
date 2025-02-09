@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Gameplay.Player.Abilities
+namespace Gameplay.Player.Abilities.Configs
 {
     public abstract class AbilityConfigSO : ScriptableObject
     {

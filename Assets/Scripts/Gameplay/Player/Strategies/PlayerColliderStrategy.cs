@@ -1,7 +1,9 @@
 ﻿using System;
 using Gameplay.Player.Interfaces;
 using Gameplay.Player.Models;
+using UI;
 using UnityEngine;
+using Utils;
 
 namespace Gameplay.Player.Strategies
 {
@@ -22,24 +24,24 @@ namespace Gameplay.Player.Strategies
 
             if (!col.gameObject.TryGetComponent(out BlockController blockController) ||
                 _playerModel.IsInvincible) return;
+
             blockController.Blink();
 
-            DeathLock();
-
+            UpdateModel();
             Invoke(nameof(DeathScreen), _playerModel.DeathTimeout);
 
-            // TODO What if there is a powerup and you also die?
+            // BUG Potentially: What if there is a PowerUp and you also die?
         }
 
-        private void DeathLock()
+        private void UpdateModel()
         {
             _playerModel.IsMovable = false;
-            // Call GameOver sequence
+            _playerModel.IsDead = true;
         }
 
         private void DeathScreen()
         {
-            // TODO UI Controller to show GameOver screen.
+            ServiceLocator.Resolve<UIService>().SwitchToScreen(ScreenType.GameOver);
         }
     }
 }

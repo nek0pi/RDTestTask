@@ -1,4 +1,6 @@
-﻿namespace Gameplay.Player.Abilities
+﻿using Gameplay.Player.Abilities.Configs;
+
+namespace Gameplay.Player.Abilities
 {
     public abstract class AbilityBase
     {

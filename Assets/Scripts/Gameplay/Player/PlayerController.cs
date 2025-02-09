@@ -9,19 +9,22 @@ namespace Gameplay.Player
     public class PlayerController : MonoBehaviour
     {
         // TODO Encapsulate collider to be readable from outside, and assignable from inside
-        public ICollide Collider;
+        public ICollide Collider => _collider;
+        public PlayerModel Model => _playerModel;
+        [SerializeField] private PlayerConfigSO _playerConfig;
+
+        private ICollide _collider;
         private IMove _mover;
         private IInput _input;
         private PlayerModel _playerModel;
 
-        [SerializeField] private PlayerConfigSO _playerConfig;
 
         // Start is called before the first frame update
         void Awake()
         {
             // Search for strategies with TryGetComponent.
             if (!TryGetComponent(out _mover)) throw new NullReferenceException("Mover not found.");
-            if (!TryGetComponent(out Collider)) throw new NullReferenceException("Collider not found.");
+            if (!TryGetComponent(out _collider)) throw new NullReferenceException("Collider not found.");
             if (!TryGetComponent(out _input)) throw new NullReferenceException("Input not found.");
 
             // Initialize the player model with the PlayerConfig.
