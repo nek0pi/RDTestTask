@@ -26,13 +26,13 @@ namespace Gameplay.Environment
         [SerializeField] private float turnChance = 0.3f;
         [SerializeField] private int turnHeight = 2; // Minimum height needed for turns
     
-        private List<PathSegment> pathSegments = new List<PathSegment>();
-        private Queue<GameObject> activeBlocks = new Queue<GameObject>();
-        private float currentTopY = 0f;
-        private int currentPathX;
-        private int levelWidth;
-        private Dictionary<Vector2Int, GameObject> blockGrid = new Dictionary<Vector2Int, GameObject>();
-        private int straightBlockCount = 0; // Track current straight path length
+        private List<PathSegment> pathSegments = new();
+        private Queue<GameObject> activeBlocks = new();
+        private float _currentTopY = 0f;
+        private int _currentPathX;
+        private int _levelWidth;
+        private Dictionary<Vector2Int, GameObject> blockGrid = new();
+        private int _straightBlockCount = 0; // Track current straight path length
 
         private struct PathSegment
         {
@@ -75,26 +75,26 @@ namespace Gameplay.Environment
 
         private void InitializeLevel()
         {
-            levelWidth = Random.Range(minWidth, maxWidth + 1);
-            currentPathX = levelWidth / 2;
-            straightBlockCount = 0;
-            Vector2Int startPoint = new Vector2Int(currentPathX, 0);
+            _levelWidth = Random.Range(minWidth, maxWidth + 1);
+            _currentPathX = _levelWidth / 2;
+            _straightBlockCount = 0;
+            Vector2Int startPoint = new Vector2Int(_currentPathX, 0);
             pathSegments.Add(new PathSegment(startPoint, startPoint, false, 0));
         }
 
         private void GenerateNextSegment()
         {
             int newY = pathSegments[pathSegments.Count - 1].end.y + 1;
-            Vector2Int startPoint = new Vector2Int(currentPathX, newY);
+            Vector2Int startPoint = new Vector2Int(_currentPathX, newY);
         
             // Force a turn if we've exceeded maxStraightBlocks
-            bool shouldTurn = straightBlockCount >= maxStraightBlocks || 
-                              (straightBlockCount >= minStraightBlocks && Random.value < turnChance);
+            bool shouldTurn = _straightBlockCount >= maxStraightBlocks || 
+                              (_straightBlockCount >= minStraightBlocks && Random.value < turnChance);
 
             if (shouldTurn)
             {
-                int maxLeftTurn = currentPathX - 1;
-                int maxRightTurn = levelWidth - 2 - currentPathX;
+                int maxLeftTurn = _currentPathX - 1;
+                int maxRightTurn = _levelWidth - 2 - _currentPathX;
             
                 bool canTurnLeft = maxLeftTurn >= 1;
                 bool canTurnRight = maxRightTurn >= 1;
@@ -105,20 +105,20 @@ namespace Gameplay.Environment
                     int maxTurn = turnLeft ? maxLeftTurn : maxRightTurn;
                     int turnDistance = Random.Range(1, maxTurn + 1);
                 
-                    int newPathX = currentPathX + (turnLeft ? -turnDistance : turnDistance);
+                    int newPathX = _currentPathX + (turnLeft ? -turnDistance : turnDistance);
                 
                     // Generate turn segment with proper height
                     for (int h = 0; h < turnHeight; h++)
                     {
-                        Vector2Int turnStart = new Vector2Int(currentPathX, newY + h);
+                        Vector2Int turnStart = new Vector2Int(_currentPathX, newY + h);
                         Vector2Int turnEnd = new Vector2Int(newPathX, newY + h);
                         pathSegments.Add(new PathSegment(turnStart, turnEnd, true, turnLeft ? -1 : 1));
                         GenerateRow(newY + h);
                     }
                 
-                    currentPathX = newPathX;
-                    currentTopY = (newY + turnHeight - 1) * blockSize;
-                    straightBlockCount = 0;
+                    _currentPathX = newPathX;
+                    _currentTopY = (newY + turnHeight - 1) * blockSize;
+                    _straightBlockCount = 0;
                 }
                 else
                 {
@@ -134,17 +134,17 @@ namespace Gameplay.Environment
 
         private void AddStraightSegment(Vector2Int startPoint, int newY)
         {
-            Vector2Int endPoint = new Vector2Int(currentPathX, newY);
+            Vector2Int endPoint = new Vector2Int(_currentPathX, newY);
             pathSegments.Add(new PathSegment(startPoint, endPoint, false, 0));
             GenerateRow(newY);
-            currentTopY = newY * blockSize;
-            straightBlockCount++;
+            _currentTopY = newY * blockSize;
+            _straightBlockCount++;
         }
 
         private void GenerateRow(int y)
         {
             // Clear any existing blocks in this row
-            for (int x = 0; x < levelWidth; x++)
+            for (int x = 0; x < _levelWidth; x++)
             {
                 Vector2Int pos = new Vector2Int(x, y);
                 if (blockGrid.ContainsKey(pos))
@@ -156,7 +156,7 @@ namespace Gameplay.Environment
 
             PathSegment currentSegment = pathSegments[pathSegments.Count - 1];
 
-            for (int x = 0; x < levelWidth; x++)
+            for (int x = 0; x < _levelWidth; x++)
             {
                 bool shouldPlaceBlock = true;
 
@@ -170,7 +170,7 @@ namespace Gameplay.Environment
                         shouldPlaceBlock = false;
                     }
                 }
-                else if (x == currentPathX)
+                else if (x == _currentPathX)
                 {
                     shouldPlaceBlock = false;
                 }
@@ -190,7 +190,7 @@ namespace Gameplay.Environment
         private void CheckAndGenerateNewSegments()
         {
             float playerY = player.transform.position.y;
-            float remainingHeight = currentTopY - playerY;
+            float remainingHeight = _currentTopY - playerY;
 
             if (remainingHeight < visibleLevelHeight + generationThreshold)
             {

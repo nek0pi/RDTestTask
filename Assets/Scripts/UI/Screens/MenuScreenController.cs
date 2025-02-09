@@ -19,6 +19,6 @@ namespace UI.Screens
 
         private void RestartLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
-        private void ContinueGame() => ServiceLocator.Resolve<UIService>().SwitchToScreen(ScreenType.Gameplay);
+        private void ContinueGame() => ServiceLocator.Resolve<IUIService>().SwitchToScreen(ScreenType.Gameplay);
     }
 }

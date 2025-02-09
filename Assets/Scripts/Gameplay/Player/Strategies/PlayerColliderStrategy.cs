@@ -43,7 +43,7 @@ namespace Gameplay.Player.Strategies
 
         private void DeathScreen()
         {
-            ServiceLocator.Resolve<UIService>().SwitchToScreen(ScreenType.GameOver);
+            ServiceLocator.Resolve<IUIService>().SwitchToScreen(ScreenType.GameOver);
         }
     }
 }
