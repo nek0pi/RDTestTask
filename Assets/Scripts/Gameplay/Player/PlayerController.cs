@@ -8,7 +8,6 @@ namespace Gameplay.Player
 {
     public class PlayerController : MonoBehaviour
     {
-        // TODO Encapsulate collider to be readable from outside, and assignable from inside
         public ICollide Collider => _collider;
         public PlayerModel Model => _playerModel;
         [SerializeField] private PlayerConfigSO _playerConfig;
@@ -16,6 +15,7 @@ namespace Gameplay.Player
         private ICollide _collider;
         private IMove _mover;
         private IInput _input;
+        private IPowerUp _powerUp;
         private PlayerModel _playerModel;
 
 
@@ -26,51 +26,16 @@ namespace Gameplay.Player
             if (!TryGetComponent(out _mover)) throw new NullReferenceException("Mover not found.");
             if (!TryGetComponent(out _collider)) throw new NullReferenceException("Collider not found.");
             if (!TryGetComponent(out _input)) throw new NullReferenceException("Input not found.");
+            if (!TryGetComponent(out _powerUp)) throw new NullReferenceException("PowerUp not found.");
 
             // Initialize the player model with the PlayerConfig.
             _playerModel = new PlayerModel(_playerConfig);
-        }
-    }
 
-    public sealed class PlayerInputStrategy : IInput
-    {
-        // Reads from UIController's GameplayScreenController X input.
-        public float GetX()
-        {
-            // TODO  Go to UIController and ask for GameplayScreenController X input.
-            throw new NotImplementedException();
-        }
-    }
-
-    public class BlockController : MonoBehaviour
-    {
-        public void Blink()
-        {
-            // TODO Blink the block.
-        }
-
-        public void Break()
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    public sealed class PlayerMoveStrategy : MonoBehaviour, IMove
-    {
-        private PlayerModel _playerModel;
-        private IInput _inputer;
-
-        public void Init(PlayerModel playerModel, IInput input)
-        {
-            _playerModel = playerModel;
-        }
-
-        private void Update()
-        {
-            if (!_playerModel.IsMovable) return;
-
-            // Move the player.
-            transform.position += new Vector3(_inputer.GetX(), _playerModel.MoveYSpeed, 0);
+            // Initialize the strategies.
+            _mover.Init(_playerModel, _input);
+            _collider.Init(_playerModel);
+            _input.Init();
+            _powerUp.Init(_collider, this);
         }
     }
 }

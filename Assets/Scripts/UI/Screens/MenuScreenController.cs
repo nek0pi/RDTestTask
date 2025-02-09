@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utils;
+using Utils.ServiceLocatorPattern;
 
 namespace UI.Screens
 {

@@ -1,4 +1,5 @@
 ﻿using System;
+using Gameplay.Environment;
 using UnityEngine;
 
 namespace Gameplay.Player.Abilities
@@ -14,7 +15,6 @@ namespace Gameplay.Player.Abilities
         public override void PowerUp(PlayerController playerController)
         {
             playerController.Collider.OnCollide += DestroyBlock;
-            throw new NotImplementedException();
         }
 
         public override void PowerDown(PlayerController playerController)

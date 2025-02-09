@@ -1,7 +1,10 @@
-﻿namespace Gameplay.Player.Interfaces
+﻿using Utils;
+
+namespace Gameplay.Player.Interfaces
 {
     public interface IInput
     {
-        float GetX();
+        void Init();
+        ReactiveFloat GetX();
     }
 }

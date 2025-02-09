@@ -1,9 +1,11 @@
 ﻿using System;
+using Gameplay.Environment;
 using Gameplay.Player.Interfaces;
 using Gameplay.Player.Models;
 using UI;
 using UnityEngine;
 using Utils;
+using Utils.ServiceLocatorPattern;
 
 namespace Gameplay.Player.Strategies
 {

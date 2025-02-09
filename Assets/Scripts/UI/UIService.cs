@@ -27,5 +27,13 @@ namespace UI
         {
             _currentScreen.Hide();
         }
+
+        public ScreenBase GetScreen(ScreenType gameplay)
+        {
+            if (_screens.ContainsKey(gameplay)) return _screens[gameplay];
+            Debug.LogError($"Screen of type {gameplay} not found in the dictionary");
+            return null;
+
+        }
     }
 }

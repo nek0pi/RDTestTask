@@ -3,6 +3,7 @@ using Data;
 using Gameplay.Player;
 using UnityEngine;
 using Utils;
+using Utils.ServiceLocatorPattern;
 
 namespace Gameplay
 {
