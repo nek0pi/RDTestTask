@@ -2,7 +2,7 @@
 
 namespace Gameplay.Environment
 {
-    [CreateAssetMenu(fileName = "LevelGeneratorConfig", menuName = "Game/Level Generator Config")]
+    [CreateAssetMenu(fileName = "LevelGeneratorConfig", menuName = "Configs/Level Generator Config")]
     public class LevelGeneratorConfigSO : ScriptableObject
     {
         [Header("Level Generation Settings")]

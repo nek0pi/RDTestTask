@@ -14,7 +14,7 @@ namespace Gameplay.Environment
 
         public void Blink()
         {
-            _spriteRenderer.DOColor(Color.red, 0.5f).SetLoops(2, LoopType.Yoyo);
+            _spriteRenderer.DOColor(Color.red, 0.35f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
         }
 
         public void Break()

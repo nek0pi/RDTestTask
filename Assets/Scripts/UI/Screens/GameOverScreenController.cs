@@ -3,7 +3,6 @@ using UI.Views;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Utils;
 using Utils.ServiceLocatorPattern;
 
 namespace UI.Screens

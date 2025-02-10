@@ -4,7 +4,6 @@ using Gameplay.Player.Interfaces;
 using Gameplay.Player.Models;
 using UI;
 using UnityEngine;
-using Utils;
 using Utils.ServiceLocatorPattern;
 
 namespace Gameplay.Player.Strategies
@@ -32,8 +31,6 @@ namespace Gameplay.Player.Strategies
 
             UpdateModel();
             Invoke(nameof(DeathScreen), _playerModel.DeathTimeout);
-
-            // BUG Potentially: What if there is a PowerUp and you also die?
         }
 
         private void UpdateModel()

@@ -12,7 +12,6 @@ namespace Gameplay.Player.Strategies
         
         public void Init(PlayerModel playerModel, IInput input)
         {
-            // TODO Before the first input, the player should be in the middle of the screen and not moving.
             _playerModel = playerModel;
             _input = input;
             _input.GetX().OnChanged += UpdateX;
@@ -20,8 +19,10 @@ namespace Gameplay.Player.Strategies
 
         private void UpdateX(float newX)
         {
+            if(_playerModel.IsDead) return;
             // Unlock the movement of the player
-            if (!_playerModel.IsDead && !_playerModel.IsMovable) _playerModel.IsMovable = true;
+            
+            if (!_playerModel.IsMovable) _playerModel.IsMovable = true;
             
             // Convert newX to the scale from level min to level max
             

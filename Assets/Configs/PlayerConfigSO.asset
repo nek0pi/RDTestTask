@@ -15,6 +15,4 @@ MonoBehaviour:
   InitMovable: 0
   InitInvincible: 0
   MoveYSpeed: 5
-  DeathTimeout: 3
-  MinX: -5
-  MaxX: 5
+  DeathTimeout: 2
