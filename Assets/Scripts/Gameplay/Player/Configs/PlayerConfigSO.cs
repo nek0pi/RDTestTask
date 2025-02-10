@@ -2,7 +2,7 @@
 
 namespace Gameplay.Player.Configs
 {
-    [CreateAssetMenu(menuName = "Configs", fileName = "PlayerConfigSO", order = 0)]
+    [CreateAssetMenu(menuName = "Configs/PlayerConfig", fileName = "PlayerConfigSO")]
     public sealed class PlayerConfigSO : ScriptableObject
     {
         public bool InitMovable;

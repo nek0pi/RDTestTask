@@ -1,27 +1,32 @@
-﻿using UnityEngine;
+﻿using Gameplay.Player.Abilities.Configs;
+using UnityEngine;
 
 namespace Gameplay.Player.Abilities
 {
     public sealed class SizeAbility : AbilityBase
     {
+        [SerializeField] private SizeAbilityConfigSO _sizeAbilityConfig;
+
         private void Grow(Transform playerTransform)
         {
-            playerTransform.localScale = new Vector3(2, 2, 2);
+            playerTransform.localScale = new Vector3(_sizeAbilityConfig.OriginalSize, _sizeAbilityConfig.OriginalSize,
+                _sizeAbilityConfig.OriginalSize);
         }
 
         private void Shrink(Transform playerTransform)
         {
-            playerTransform.localScale = new Vector3(1, 1, 1);
+            playerTransform.localScale = new Vector3(_sizeAbilityConfig.ShrinkSize, _sizeAbilityConfig.ShrinkSize,
+                _sizeAbilityConfig.ShrinkSize);
         }
 
         public override void PowerUp(PlayerController playerController)
         {
-            Grow(playerController.transform);
+            Shrink(playerController.transform);
         }
 
         public override void PowerDown(PlayerController playerController)
         {
-            Shrink(playerController.transform);
+            Grow(playerController.transform);
         }
     }
 }

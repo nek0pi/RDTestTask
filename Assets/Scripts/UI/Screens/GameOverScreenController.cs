@@ -13,13 +13,18 @@ namespace UI.Screens
         [SerializeField] private ScoreView _currentScoreView;
         [SerializeField] private ScoreView _maxScoreView;
         [SerializeField] private Button _resetGameButton;
-
+        private IScoreService _scoreService;
         protected override void Init()
         {
-            var scoreService = ServiceLocator.Resolve<IScoreService>();
-            _currentScoreView.SubscribeToScoreChanges(scoreService.GetCurrentScore());
-            _maxScoreView.SetScore(scoreService.GetMaxScore());
+            _scoreService = ServiceLocator.Resolve<IScoreService>();
             _resetGameButton.onClick.AddListener(RestartLevel);
+        }
+
+        public override void Show()
+        {
+            base.Show();
+            _currentScoreView.SetScore(_scoreService.GetCurrentScore().Current);
+            _maxScoreView.SetScore(_scoreService.GetMaxScore());
         }
 
         private void RestartLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);

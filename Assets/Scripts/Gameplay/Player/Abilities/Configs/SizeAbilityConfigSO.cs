@@ -2,9 +2,10 @@
 
 namespace Gameplay.Player.Abilities.Configs
 {
-    [CreateAssetMenu(menuName = "Configs", fileName = "SizeAbilityConfigSO", order = 0)]
+    [CreateAssetMenu(menuName = "Configs/SizeAbilityConfig", fileName = "SizeAbilityConfigSO")]
     public sealed class SizeAbilityConfigSO : AbilityConfigSO
     {
-        public float SizeMultiplier;
+        public float ShrinkSize;
+        public float OriginalSize;
     }
 }
