@@ -10,7 +10,7 @@ namespace Gameplay
     public class ScoreService : MonoBehaviour, IScoreService
     {
         private int _maxScore;
-        private ReactiveInt _currentScore;
+        private ReactiveInt _currentScore = new ReactiveInt();
         [SerializeField] private PlayerController _playerController;
         private IProgressService _progressService;
 
@@ -21,12 +21,12 @@ namespace Gameplay
         {
             _progressService = ServiceLocator.Resolve<IProgressService>();
             _maxScore = _progressService.GetMaxScore();
-            _currentScore = new ReactiveInt();
         }
 
         private void Update()
         {
-            if (_playerController.Model.IsDead) return;
+            if (_playerController == null || _playerController.Model == null) return;
+            if (_playerController.Model.IsDead || _playerController.Model.IsMovable == false) return;
             _timer += Time.deltaTime;
 
             // Check if pointInterval seconds have passed

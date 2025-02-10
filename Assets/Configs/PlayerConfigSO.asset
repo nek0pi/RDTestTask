@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitMovable: 0
   InitInvincible: 0
-  MoveYSpeed: 15
+  MoveYSpeed: 5
   DeathTimeout: 3
+  MinX: -5
+  MaxX: 5

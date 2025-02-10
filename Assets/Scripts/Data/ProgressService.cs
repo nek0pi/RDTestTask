@@ -17,7 +17,16 @@ namespace Data
 
         public int GetMaxScore()
         {
+            _saveLoadService ??= ServiceLocator.Resolve<ISaveLoadService>();
             _progressModelCache = _saveLoadService.LoadSync();
+
+            return _progressModelCache?.MaxScore ?? HandleNullProgress();
+        }
+
+        private int HandleNullProgress()
+        {
+            _progressModelCache = new GameProgressModel();
+            _saveLoadService.Save(_progressModelCache);
             return _progressModelCache.MaxScore;
         }
 

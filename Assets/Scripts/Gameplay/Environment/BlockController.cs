@@ -7,7 +7,7 @@ namespace Gameplay.Environment
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
-        private void Awake()
+        private void Start()
         {
             TryGetComponent(out _spriteRenderer);
         }

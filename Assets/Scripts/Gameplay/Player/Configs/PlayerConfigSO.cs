@@ -9,5 +9,7 @@ namespace Gameplay.Player.Configs
         public bool InitInvincible;
         public float MoveYSpeed;
         public float DeathTimeout;
+        public float MinX;
+        public float MaxX;
     }
 }

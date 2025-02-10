@@ -6,7 +6,7 @@ namespace UI.Screens
     {
         [SerializeField] protected GameObject _screenRoot;
 
-        private void Awake()
+        private void Start()
         {
             Init();
         }

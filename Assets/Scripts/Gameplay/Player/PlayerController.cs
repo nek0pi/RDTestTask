@@ -20,21 +20,21 @@ namespace Gameplay.Player
 
 
         // Start is called before the first frame update
-        void Awake()
+        void Start()
         {
             // Search for strategies with TryGetComponent.
             if (!TryGetComponent(out _mover)) throw new NullReferenceException("Mover not found.");
             if (!TryGetComponent(out _collider)) throw new NullReferenceException("Collider not found.");
             if (!TryGetComponent(out _input)) throw new NullReferenceException("Input not found.");
             if (!TryGetComponent(out _powerUp)) throw new NullReferenceException("PowerUp not found.");
-
+            
             // Initialize the player model with the PlayerConfig.
             _playerModel = new PlayerModel(_playerConfig);
 
             // Initialize the strategies.
+            _input.Init();
             _mover.Init(_playerModel, _input);
             _collider.Init(_playerModel);
-            _input.Init();
             _powerUp.Init(_collider, this);
         }
     }

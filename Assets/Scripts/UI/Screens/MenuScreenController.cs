@@ -17,7 +17,25 @@ namespace UI.Screens
             _continueGameButton.onClick.AddListener(ContinueGame);
         }
 
-        private void RestartLevel() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        public override void Show()
+        {
+            base.Show();
+            // Pause the game
+            Time.timeScale = 0;
+        }
+
+        public override void Hide()
+        {
+            base.Hide();
+            // Unpause the game
+            Time.timeScale = 1;
+        }
+
+        private void RestartLevel()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Time.timeScale = 1;
+        }
 
         private void ContinueGame() => ServiceLocator.Resolve<IUIService>().SwitchToScreen(ScreenType.Gameplay);
     }
