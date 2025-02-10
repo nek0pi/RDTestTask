@@ -12,8 +12,6 @@ namespace Gameplay.Player.Models
         public bool IsDead;
         public float MoveYSpeed;
         public float DeathTimeout;
-        public float MinX;
-        public float MaxX;
 
         public PlayerModel(PlayerConfigSO playerConfig)
         {
@@ -21,8 +19,6 @@ namespace Gameplay.Player.Models
             IsInvincible = playerConfig.InitInvincible;
             MoveYSpeed = playerConfig.MoveYSpeed;
             DeathTimeout = playerConfig.DeathTimeout;
-            MinX = playerConfig.MinX;
-            MaxX = playerConfig.MaxX;
             IsDead = false;
         }
     }

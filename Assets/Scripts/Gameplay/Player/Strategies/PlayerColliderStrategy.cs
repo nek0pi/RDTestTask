@@ -24,9 +24,10 @@ namespace Gameplay.Player.Strategies
         {
             OnCollide?.Invoke(col.gameObject);
 
-            if (!col.gameObject.TryGetComponent(out BlockController blockController) ||
-                _playerModel.IsInvincible) return;
+            // Using compare tag here because it's faster then trying to get the component.
+            if (!col.gameObject.CompareTag("Wall") || _playerModel.IsInvincible) return;
 
+            col.gameObject.TryGetComponent(out BlockController blockController);
             blockController.Blink();
 
             UpdateModel();

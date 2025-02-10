@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502b7836fc31475bbbdb5b7cdba61c83, type: 3}
   m_Name: LevelGeneratorConfigSO
   m_EditorClassIdentifier: 
-  LevelWidth: 7
-  LevelHeight: 7
-  BlockPrefab: {fileID: 6396463304926999852, guid: 6e99cf4461d42dd40a2206d60b59d862, type: 3}
+  MinWidth: 7
+  MaxWidth: 7
+  BlockSize: 1
+  VisibleLevelHeight: 10
+  WallBlockPrefab: {fileID: 2991034253140571262, guid: 6e99cf4461d42dd40a2206d60b59d862, type: 3}
+  GenerationThreshold: 5
+  MinStraightBlocks: 2
+  MaxStraightBlocks: 4
+  TurnChance: 0.3
+  TurnHeight: 2
+  AbilityBasePrefab: {fileID: 248460035688922095, guid: a6d14dcf010c6774691fb493b4f55819, type: 3}
+  BlocksBetweenAbilities: 15
