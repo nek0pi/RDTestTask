@@ -23,4 +23,4 @@ MonoBehaviour:
   TurnChance: 0.3
   TurnHeight: 2
   AbilityBasePrefab: {fileID: 248460035688922095, guid: a6d14dcf010c6774691fb493b4f55819, type: 3}
-  BlocksBetweenAbilities: 15
+  BlocksBetweenAbilities: 25
